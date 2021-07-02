@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: innosec
+      MARIADB_PASSWORD: innosec 
+      MARIADB_USER: root
+      MARIADB_DB: innosec
+    volumes:
+      - ./mariadb:/var/lib/mariadb/data
+    ports:
+      - "3306:3306"
+  web:
+    image: stripe-example-multi-stage
+    depends_on:
+      - db
+    ports:
+      - "4000:4000"
+        
